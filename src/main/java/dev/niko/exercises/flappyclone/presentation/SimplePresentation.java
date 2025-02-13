@@ -1,0 +1,97 @@
+package dev.niko.exercises.flappyclone.presentation;
+
+import dev.niko.exercises.flappyclone.datamodel.*;
+import dev.niko.utils.Vector;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class SimplePresentation extends Frame {
+	private KPajarito pajarito;
+	private KBackground bg1, bg2;
+	private List<KPipe> pipes;
+	private List<KTree> trees;
+	private Image doubleBuffer;
+	
+	public SimplePresentation(KPajarito pajarito, KBackground bg1, KBackground bg2, List<KPipe> pipes, List<KTree> trees) {
+		super();
+		this.pajarito = pajarito;
+		this.bg1 = bg1;
+		this.bg2 = bg2;
+		this.pipes = pipes;
+		this.trees = trees;
+	}
+	
+	public void init() {
+		setSize(Double.valueOf(World.worldW).intValue(), Double.valueOf(World.worldH).intValue());
+		setSize(getWidth() + getInsets().left + getInsets().right, getHeight() + getInsets().top + getInsets().bottom);
+		setTitle("Presentación simple para Flappy");
+		setVisible(true);
+		
+		doubleBuffer = createImage(getWidth(), getHeight());
+		
+		addWindowListener( new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		} );
+	}
+	
+	@Override
+	public void update(Graphics g) {
+		paint(g);
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		if(doubleBuffer == null) return;
+	
+		Graphics frameG = g;
+		g = doubleBuffer.getGraphics();
+		
+		paintKRectangle(bg1, g);
+		paintKRectangle(bg2, g);
+		for(KTree tree : trees)
+			paintKTree(tree, g);
+		for(KPipe pipe : pipes)
+			paintKPipe(pipe, g);
+		paintKRectangle(pajarito, g);
+		
+		frameG.drawImage(doubleBuffer, getInsets().left, getInsets().top, null);
+	}
+	private void paintKRectangle(KRectangle r, Graphics g) {
+		int x = Double.valueOf(r.posicion.x).intValue();
+		int y = Double.valueOf(r.posicion.y).intValue();
+		int width = Double.valueOf(r.width).intValue();
+		int height = Double.valueOf(r.height).intValue();
+	
+		g.setColor(r.color);
+		g.fillRect(x, y, width, height);
+	}
+	private void paintKTree(KTree tree, Graphics g) {
+		paintKRectangle(tree.copa, g);
+		paintKRectangle(tree.tronco, g);
+	}
+	private void paintKPipe(KPipe pipe, Graphics g) {
+		paintKRectangle(pipe.smallUR, g);
+		paintKRectangle(pipe.smallDR, g);
+		paintKRectangle(pipe.largeUR, g);
+		paintKRectangle(pipe.largeDR, g);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
