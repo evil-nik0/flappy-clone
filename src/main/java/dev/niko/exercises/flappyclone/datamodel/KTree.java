@@ -1,6 +1,6 @@
 package dev.niko.exercises.flappyclone.datamodel;
 
-import dev.niko.utils.Vector;
+import dev.niko.utils.*;
 import java.awt.Color;
 
 public class KTree {
@@ -8,6 +8,7 @@ public class KTree {
 	public static double C_W = 100, C_H = 100;
 	public static double T_W = 50;
 	public static double TH_MIN = 50, TH_MAX = 300;
+	public static double PROBABILIDAD_DE_CREAR_NUEVO_TREE = 30;
 	
 	static {
 		if(T_W >= C_W) throw new RuntimeException("El ancho de los troncos debe ser menor al ancho de la copa!!");
@@ -55,6 +56,13 @@ public class KTree {
 		if(t1.copa.posicion.x < t2.copa.posicion.x) return -1;
 		else if(t1.copa.posicion.x == t2.copa.posicion.x) return 0;
 		else return 1;
+	}
+	
+	public boolean overlapsWith(KTree t) {
+		double deepness = Intervals.overlappingDeepness( this.copa.posicion.x, this.copa.posicion.x + this.copa.width, 
+								  t.copa.posicion.x, t.copa.posicion.x + t.copa.width);
+		if(deepness == -1 || deepness == 0) return false;
+		else return true;
 	}
 	
 	@Override
