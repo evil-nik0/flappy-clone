@@ -15,6 +15,9 @@ public class SimplePresentation extends Frame {
 	private List<KTree> trees;
 	private Image doubleBuffer;
 	
+	public static int SCREEN_W = 1760, SCREEN_H = 990; // 16/9
+	public static double RATIOBETWCOORDSYSTEMS = SCREEN_W / World.WorldW; //if the two are 16/9 or 4/3, then the ratio between heights is the same
+	
 	public SimplePresentation(KPajarito pajarito, KBackground bg1, KBackground bg2, List<KPipe> pipes, List<KTree> trees) {
 		super();
 		this.pajarito = pajarito;

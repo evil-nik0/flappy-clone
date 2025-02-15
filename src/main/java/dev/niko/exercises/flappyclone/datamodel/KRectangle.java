@@ -44,4 +44,12 @@ public class KRectangle {
 		velocidad = Vector.suma(aceleracion, velocidad);
 		posicion = Vector.suma(velocidad, posicion);
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("[%f, %f]", posicion.x, posicion.y);
+	}
 }
+
+
+

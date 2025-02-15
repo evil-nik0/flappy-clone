@@ -21,8 +21,12 @@ public class App {
 	pipes.add( new KPipe().setX(2 * World.worldW/4) );
 	pipes.add( new KPipe().setX(3 * World.worldW/4) );
 	List<KTree> trees = new ArrayList<>();
-	trees.add( new KTree().setX(World.worldW / 3) );
-	trees.add( new KTree().setX(2 * World.worldW / 3) );
+	trees.add( new KTree().setX(World.worldW / 6) );
+	trees.add( new KTree().setX(3 * World.worldW / 6) );
+	trees.add( new KTree().setX(5 * World.worldW / 6) );
+	trees.add( new KTree().setX(2 * World.worldW / 6) );
+	trees.add( new KTree().setX(4 * World.worldW / 6) );
+	trees.sort( (t1, t2) -> KTree.compare(t1, t2) );
 	SimplePresentation pres = new SimplePresentation(pajarito, bg1, bg2, pipes, trees);
 	pres.init();
 	
@@ -36,6 +40,22 @@ public class App {
 			pipe.update();
 		for(KTree tree : trees)
 			tree.update();
+			
+		/*
+		//chequear si hace falta eliminar árboles, pipes o un background
+		for(int i = 0; i < pipes.size(); i++)
+			if(pipes.get(i).smallUR.posicion.x+pipes.get(i).smallUR.width < 0)
+				pipes.remove(i);
+		for(int i = 0; i < trees.size(); i++)
+			if(trees.get(i).copa.posicion.x+trees.get(i).copa.width < 0)
+				trees.remove(i);
+		
+		if(bg1.posicion.x + bg1.width < 0) {
+			bg1 = bg2;
+			bg2 = null;
+		}
+		*/
+		
 
 		pres.repaint();
 		

@@ -5,9 +5,9 @@ import java.awt.Color;
 
 public class KTree {
 	public static double TREES_VEL = -10;
-	public static double C_W = 20, C_H = 20;
-	public static double T_W = 10;
-	public static double TH_MIN = 20, TH_MAX = 120;
+	public static double C_W = 100, C_H = 100;
+	public static double T_W = 50;
+	public static double TH_MIN = 50, TH_MAX = 300;
 	
 	static {
 		if(T_W >= C_W) throw new RuntimeException("El ancho de los troncos debe ser menor al ancho de la copa!!");
@@ -50,4 +50,23 @@ public class KTree {
 		
 		return this;
 	}
+	
+	public static int compare(KTree t1, KTree t2) {
+		if(t1.copa.posicion.x < t2.copa.posicion.x) return -1;
+		else if(t1.copa.posicion.x == t2.copa.posicion.x) return 0;
+		else return 1;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("Copa: %s, Tronco: %s", copa.toString(), tronco.toString());
+	}
 }
+
+
+
+
+
+
+
+
