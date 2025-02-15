@@ -15,7 +15,7 @@ public class SimplePresentation extends Frame {
 	private List<KTree> trees;
 	private Image doubleBuffer;
 	
-	public static int SCREEN_W = 1760, SCREEN_H = 990; // 16/9
+	public static int SCREEN_W = 1440, SCREEN_H = 810; // 16/9
 	public static double RATIOBETWCOORDSYSTEMS = SCREEN_W / World.worldW; //if the two are 16/9 or 4/3, then the ratio between heights is the same
 	
 	public SimplePresentation(KPajarito pajarito, KBackground bg1, KBackground bg2, List<KPipe> pipes, List<KTree> trees) {
@@ -28,12 +28,12 @@ public class SimplePresentation extends Frame {
 	}
 	
 	public void init() {
-		setSize(Double.valueOf(World.worldW).intValue(), Double.valueOf(World.worldH).intValue());
+		setSize(SCREEN_W, SCREEN_H);
 		setSize(getWidth() + getInsets().left + getInsets().right, getHeight() + getInsets().top + getInsets().bottom);
 		setTitle("Presentación simple para Flappy");
 		setVisible(true);
 		
-		doubleBuffer = createImage(getWidth(), getHeight());
+		doubleBuffer = createImage(SCREEN_W, SCREEN_H);
 		
 		addWindowListener( new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -65,13 +65,10 @@ public class SimplePresentation extends Frame {
 		frameG.drawImage(doubleBuffer, getInsets().left, getInsets().top, null);
 	}
 	private void paintKRectangle(KRectangle r, Graphics g) {
-		int x = Double.valueOf(r.posicion.x).intValue();
-		int y = Double.valueOf(r.posicion.y).intValue();
-		int width = Double.valueOf(r.width).intValue();
-		int height = Double.valueOf(r.height).intValue();
+		int[] rectInfo = convertToPresentation(r.posicion.x, r.posicion.y, r.width, r.height);
 	
 		g.setColor(r.color);
-		g.fillRect(x, y, width, height);
+		g.fillRect(rectInfo[0], rectInfo[1], rectInfo[2], rectInfo[3]);
 	}
 	private void paintKTree(KTree tree, Graphics g) {
 		paintKRectangle(tree.copa, g);
@@ -82,6 +79,14 @@ public class SimplePresentation extends Frame {
 		paintKRectangle(pipe.smallDR, g);
 		paintKRectangle(pipe.largeUR, g);
 		paintKRectangle(pipe.largeDR, g);
+	}
+	
+	private int[] convertToPresentation(double x, double y, double width, double height) {
+		return new int[] { Double.valueOf(x * RATIOBETWCOORDSYSTEMS).intValue(),
+				      Double.valueOf(y * RATIOBETWCOORDSYSTEMS).intValue(),
+				      Double.valueOf(width * RATIOBETWCOORDSYSTEMS).intValue(),
+				      Double.valueOf(height * RATIOBETWCOORDSYSTEMS).intValue()
+			};
 	}
 }
 
