@@ -15,10 +15,11 @@ public class App {
     	gs = GameState.PLAYING;
     	long mSPF = Math.floorDiv(1000, FPS), initialTime;
     	boolean seBorroUnPipe = false;
+    	Controles ctrles = new Controles();
 	KPajarito pajarito = new KPajarito();
 	List<KBackground> bgs = new ArrayList<>();
 	bgs.add( new KBackground().ubicarEnOrigen().setColor(Color.WHITE) ); 
-	bgs.add( new KBackground().ubicarALaDerecha().setColor(Color.BLUE) );
+	bgs.add( new KBackground().ubicarALaDerecha().setColor(Color.WHITE) );
 	List<KPipe> pipes = new ArrayList<>();
 	pipes.add( new KPipe().setX(World.worldW/10) );
 	pipes.add( new KPipe().setX(3 * World.worldW/10) );
@@ -34,6 +35,7 @@ public class App {
 	trees.sort( (t1, t2) -> KTree.compare(t1, t2) );
 	SimplePresentation pres = new SimplePresentation(pajarito, bgs, pipes, trees);
 	pres.init();
+	pres.addKeyListener( ctrles );
 	
 	initialTime = System.currentTimeMillis();
 	while(true) if( System.currentTimeMillis() - initialTime > mSPF ) {
@@ -73,6 +75,12 @@ public class App {
 		if(bgs.size() == 1)
 			bgs.add( new KBackground().ubicarALaDerecha().setColor(Color.WHITE) );
 		
+		//si se presionó espacio, se acelera hacia arriba al pajarito
+		if(ctrles.spacePressed) {
+			pajarito.velocidad.y = 0;
+			pajarito.setUpwardsAcceleration();
+			ctrles.spacePressed = false;
+		}
 			
 		pres.repaint();
 		
