@@ -42,7 +42,7 @@ public class ModelExtension {
 		return this;
 	}
 	
-	public void gsPlayingLoop() {
+	public void gsPlayingLoop(ModelExtAnswer answer) {
     		pajarito.update();
 		for(KBackground bg : bgs)
 			bg.update();
@@ -89,19 +89,19 @@ public class ModelExtension {
 		for(KPipe pipe : pipes)
 			if( PhysicsEngine.areRectanglesColliding(pajarito.posicion.x, pajarito.posicion.y, pajarito.width, pajarito.height, 
 							pipe.smallDR.posicion.x, pipe.smallDR.posicion.y, pipe.smallDR.width, pipe.smallDR.height)[1] != -1 )
-				gs = GameState.OVER;
+				answer.wasACollision = true;
 			else 
 			if( PhysicsEngine.areRectanglesColliding(pajarito.posicion.x, pajarito.posicion.y, pajarito.width, pajarito.height, 
 							pipe.smallUR.posicion.x, pipe.smallUR.posicion.y, pipe.smallUR.width, pipe.smallUR.height)[1] != -1 )
-				gs = GameState.OVER;
+				answer.wasACollision = true;
 			else 
 			if( PhysicsEngine.areRectanglesColliding(pajarito.posicion.x, pajarito.posicion.y, pajarito.width, pajarito.height, 
 							pipe.largeUR.posicion.x, pipe.largeUR.posicion.y, pipe.largeUR.width, pipe.largeUR.height)[1] != -1 )
-				gs = GameState.OVER;
+				answer.wasACollision = true;
 			else 
 			if( PhysicsEngine.areRectanglesColliding(pajarito.posicion.x, pajarito.posicion.y, pajarito.width, pajarito.height, 
 							pipe.largeDR.posicion.x, pipe.largeDR.posicion.y, pipe.largeDR.width, pipe.largeDR.height)[1] != -1 )
-				gs = GameState.OVER;
+				answer.wasACollision = true;
 		
     	}
 }

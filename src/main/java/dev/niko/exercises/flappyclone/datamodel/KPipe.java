@@ -7,7 +7,7 @@ public class KPipe {
 	public static double PIPE_VELOCITY = -5;
 	public static double SRW = 40, SRH = 20, LRW = 30; //SRW es small rectangle width, etc.
 	public static double MINIMUMLRH = 30;
-	public static double DISTBETWPIPES = 300; //between the top of the pipes
+	public static double DISTBETWPIPES = 600; //between the top of the pipes
 	
 	static {
 		if(DISTBETWPIPES % 2 != 0) throw new RuntimeException("La distancia entre las pipes debería ser un número par, creeeo");

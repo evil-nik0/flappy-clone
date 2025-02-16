@@ -13,6 +13,7 @@ public class App {
     public static void main(String[] args) throws Exception {
     	long mSPHB = Math.floorDiv(1000, HBPS), initialTime;
     	ModelExtension extension = new ModelExtension().initializeModelExt();
+    	ModelExtAnswer answer;
 	SimplePresentation pres = new SimplePresentation(extension);
 	pres.init();
 	pres.addKeyListener( extension.ctrles );
@@ -22,8 +23,10 @@ public class App {
 		
 		switch(extension.gs) {
 			case PLAYING:
-				extension.gsPlayingLoop();
+				answer = new ModelExtAnswer();
+				extension.gsPlayingLoop(answer);
 				pres.repaint();
+				if(answer.wasACollision) extension.gs = GameState.OVER;
 				break;
 			case OVER:
 				if(extension.ctrles.spacePressed) {
