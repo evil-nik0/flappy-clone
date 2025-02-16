@@ -14,9 +14,13 @@ public class ModelExtension {
 	public List<KTree> trees;
 	
 	public ModelExtension() {
+		ctrles = new Controles();
+		initializeModelExt();
+	}
+	
+	public ModelExtension initializeModelExt() {
 		gs = GameState.PLAYING;
 		seBorroUnPipe = false;
-	    	ctrles = new Controles();
 		pajarito = new KPajarito();
 		bgs = new ArrayList<>();
 		bgs.add( new KBackground().ubicarEnOrigen().setColor(Color.WHITE) ); 
@@ -34,6 +38,8 @@ public class ModelExtension {
 		trees.add( new KTree().setX(2 * World.worldW / 6) );
 		trees.add( new KTree().setX(4 * World.worldW / 6) );
 		trees.sort( (t1, t2) -> KTree.compare(t1, t2) );
+		
+		return this;
 	}
 	
 	public void gsPlayingLoop() {
@@ -80,7 +86,22 @@ public class ModelExtension {
 		}
 		
 		//se chequean colisiones
-		
+		for(KPipe pipe : pipes)
+			if( PhysicsEngine.areRectanglesColliding(pajarito.posicion.x, pajarito.posicion.y, pajarito.width, pajarito.height, 
+							pipe.smallDR.posicion.x, pipe.smallDR.posicion.y, pipe.smallDR.width, pipe.smallDR.height)[1] != -1 )
+				gs = GameState.OVER;
+			else 
+			if( PhysicsEngine.areRectanglesColliding(pajarito.posicion.x, pajarito.posicion.y, pajarito.width, pajarito.height, 
+							pipe.smallUR.posicion.x, pipe.smallUR.posicion.y, pipe.smallUR.width, pipe.smallUR.height)[1] != -1 )
+				gs = GameState.OVER;
+			else 
+			if( PhysicsEngine.areRectanglesColliding(pajarito.posicion.x, pajarito.posicion.y, pajarito.width, pajarito.height, 
+							pipe.largeUR.posicion.x, pipe.largeUR.posicion.y, pipe.largeUR.width, pipe.largeUR.height)[1] != -1 )
+				gs = GameState.OVER;
+			else 
+			if( PhysicsEngine.areRectanglesColliding(pajarito.posicion.x, pajarito.posicion.y, pajarito.width, pajarito.height, 
+							pipe.largeDR.posicion.x, pipe.largeDR.posicion.y, pipe.largeDR.width, pipe.largeDR.height)[1] != -1 )
+				gs = GameState.OVER;
 		
     	}
 }

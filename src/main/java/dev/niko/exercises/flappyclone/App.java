@@ -12,7 +12,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
     	long mSPHB = Math.floorDiv(1000, HBPS), initialTime;
-    	ModelExtension extension = new ModelExtension();
+    	ModelExtension extension = new ModelExtension().initializeModelExt();
 	SimplePresentation pres = new SimplePresentation(extension);
 	pres.init();
 	pres.addKeyListener( extension.ctrles );
@@ -27,8 +27,8 @@ public class App {
 				break;
 			case OVER:
 				if(extension.ctrles.spacePressed) {
-					extension.gs = GameState.PLAYING;
 					extension.ctrles.spacePressed = false;
+					extension.initializeModelExt();
 				}
 				break;
 			default:
