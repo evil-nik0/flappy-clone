@@ -79,5 +79,8 @@ public class ModelExtension {
 			ctrles.spacePressed = false;
 		}
 		
+		//se chequean colisiones
+		
+		
     	}
 }
