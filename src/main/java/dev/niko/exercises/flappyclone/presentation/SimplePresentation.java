@@ -43,10 +43,24 @@ public class SimplePresentation extends Frame {
 	@Override
 	public void paint(Graphics g) {
 		if(doubleBuffer == null) return;
-	
 		Graphics frameG = g;
 		g = doubleBuffer.getGraphics();
 		
+		switch(e.gs) {
+			case PLAYING:
+				paintGsPlaying(g);
+				break;
+			case OVER:
+				
+				break;
+			default:
+			
+		}
+		
+		frameG.drawImage(doubleBuffer, getInsets().left, getInsets().top, null);
+	}
+	
+	private void paintGsPlaying(Graphics g) {
 		for(KBackground bg : e.bgs)
 			paintKRectangle(bg, g);
 		for(KTree tree : e.trees)
@@ -54,8 +68,6 @@ public class SimplePresentation extends Frame {
 		for(KPipe pipe : e.pipes)
 			paintKPipe(pipe, g);
 		paintKRectangle(e.pajarito, g);
-		
-		frameG.drawImage(doubleBuffer, getInsets().left, getInsets().top, null);
 	}
 	private void paintKRectangle(KRectangle r, Graphics g) {
 		int[] rectInfo = convertToPresentation(r.posicion.x, r.posicion.y, r.width, r.height);
