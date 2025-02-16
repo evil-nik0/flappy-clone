@@ -9,21 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimplePresentation extends Frame {
-	private KPajarito pajarito;
-	private List<KBackground> bgs;
-	private List<KPipe> pipes;
-	private List<KTree> trees;
+	private ModelExtension e;
 	private Image doubleBuffer;
 	
 	public static int SCREEN_W = 1424, SCREEN_H = 801; // mirar anotación de World.java
 	public static double RATIOBETWCOORDSYSTEMS = SCREEN_W / World.worldW; //if the two are 16/9 or 4/3, then the ratio between heights is the same
 	
-	public SimplePresentation(KPajarito pajarito, List<KBackground> bgs, List<KPipe> pipes, List<KTree> trees) {
+	public SimplePresentation(ModelExtension e) {
 		super();
-		this.pajarito = pajarito;
-		this.bgs = bgs;
-		this.pipes = pipes;
-		this.trees = trees;
+		this.e = e;
 	}
 	
 	public void init() {
@@ -53,13 +47,13 @@ public class SimplePresentation extends Frame {
 		Graphics frameG = g;
 		g = doubleBuffer.getGraphics();
 		
-		for(KBackground bg : bgs)
+		for(KBackground bg : e.bgs)
 			paintKRectangle(bg, g);
-		for(KTree tree : trees)
+		for(KTree tree : e.trees)
 			paintKTree(tree, g);
-		for(KPipe pipe : pipes)
+		for(KPipe pipe : e.pipes)
 			paintKPipe(pipe, g);
-		paintKRectangle(pajarito, g);
+		paintKRectangle(e.pajarito, g);
 		
 		frameG.drawImage(doubleBuffer, getInsets().left, getInsets().top, null);
 	}
