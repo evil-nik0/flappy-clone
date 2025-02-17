@@ -5,9 +5,9 @@ import java.awt.Color;
 
 public class KPajarito extends KRectangle {
 	public static double PA_X_VELOCITY = 0;
-	public static double PA_WIDTH = 30, PA_HEIGHT = 30;
+	public static double PA_WIDTH = 100, PA_HEIGHT = PA_WIDTH;
 	public static double PA_INITIAL_X = 100;
-	public static double U_ACC = -15, U_ACC_DEC = -4;
+	public static double U_ACC = -12, U_ACC_DEC = -4;
 	
 	public Vector upwardsAcc;
 	

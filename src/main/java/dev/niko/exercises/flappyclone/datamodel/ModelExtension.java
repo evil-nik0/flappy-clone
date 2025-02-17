@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.awt.Color;
 
+//en realidad, debería ser ModelIntension, y la extension sería la instancia devuelta por el constructor
 public class ModelExtension {
 	public GameState gs;
 	public boolean seBorroUnPipe;
@@ -26,11 +27,9 @@ public class ModelExtension {
 		bgs.add( new KBackground().ubicarEnOrigen().setColor(Color.WHITE) ); 
 		bgs.add( new KBackground().ubicarALaDerecha().setColor(Color.WHITE) );
 		pipes = new ArrayList<>();
-		pipes.add( new KPipe().setX(World.worldW/10) );
-		pipes.add( new KPipe().setX(3 * World.worldW/10) );
-		pipes.add( new KPipe().setX(5 * World.worldW/10) );
-		pipes.add( new KPipe().setX(7 * World.worldW/10) );
-		pipes.add( new KPipe().setX(9 * World.worldW/10) );
+		pipes.add( new KPipe().setX(World.worldW/3) );
+		pipes.add( new KPipe().setX(2 * World.worldW/3) );
+		pipes.add( new KPipe().setX(3 * World.worldW/3) );
 		trees = new ArrayList<>();
 		trees.add( new KTree().setX(World.worldW / 6) );
 		trees.add( new KTree().setX(3 * World.worldW / 6) );
@@ -102,6 +101,8 @@ public class ModelExtension {
 			if( PhysicsEngine.areRectanglesColliding(pajarito.posicion.x, pajarito.posicion.y, pajarito.width, pajarito.height, 
 							pipe.largeDR.posicion.x, pipe.largeDR.posicion.y, pipe.largeDR.width, pipe.largeDR.height)[1] != -1 )
 				answer.wasACollision = true;
+		if(pajarito.posicion.y <= 0 || pajarito.posicion.y >= World.worldH)
+			answer.wasACollision = true;
 		
     	}
 }
