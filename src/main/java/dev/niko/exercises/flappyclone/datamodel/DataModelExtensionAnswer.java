@@ -1,9 +1,9 @@
 package dev.niko.exercises.flappyclone.datamodel;
 
-public class ModelExtAnswer {
+public class DataModelExtensionAnswer {
 	public boolean wasACollision;
 	
-	public ModelExtAnswer() {
+	public DataModelExtensionAnswer() {
 		wasACollision = false;
 	}
 }

@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.awt.Color;
 
-//en realidad, debería ser ModelIntension, y la extension sería la instancia devuelta por el constructor
-public class ModelExtension {
+public class DataModelIntension {
 	public GameState gs;
 	public boolean seBorroUnPipe;
     	public Controles ctrles;
@@ -14,12 +13,12 @@ public class ModelExtension {
 	public List<KPipe> pipes;
 	public List<KTree> trees;
 	
-	public ModelExtension() {
+	public DataModelIntension() {
 		ctrles = new Controles();
-		initializeModelExt();
+		initializeInstance();
 	}
 	
-	public ModelExtension initializeModelExt() {
+	public DataModelIntension initializeInstance() {
 		gs = GameState.PLAYING;
 		seBorroUnPipe = false;
 		pajarito = new KPajarito();
@@ -41,7 +40,7 @@ public class ModelExtension {
 		return this;
 	}
 	
-	public void gsPlayingLoop(ModelExtAnswer answer) {
+	public void gsPlayingLoop(DataModelExtensionAnswer answer) {
     		pajarito.update();
 		for(KBackground bg : bgs)
 			bg.update();

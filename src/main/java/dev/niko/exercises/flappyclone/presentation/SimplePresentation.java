@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimplePresentation extends Frame {
-	private ModelExtension e;
+	private DataModelIntension e;
 	private Image doubleBuffer;
 	
 	public static int SCREEN_W = 1424, SCREEN_H = 801; // mirar anotación de World.java
 	public static double RATIOBETWCOORDSYSTEMS = SCREEN_W / World.worldW; //if the two are 16/9 or 4/3, then the ratio between heights is the same
 	
-	public SimplePresentation(ModelExtension e) {
+	public SimplePresentation(DataModelIntension e) {
 		super();
 		this.e = e;
 	}
