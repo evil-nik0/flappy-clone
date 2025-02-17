@@ -23,7 +23,7 @@ public class App {
 		
 		switch(extension.gs) {
 			case PLAYING:
-				answer = new DataModelExtensionAnswer();
+				answer = new DataModelExtensionAnswer(System.currentTimeMillis());
 				extension.gsPlayingLoop(answer);
 				pres.repaint();
 				if(answer.wasACollision) extension.gs = GameState.OVER;

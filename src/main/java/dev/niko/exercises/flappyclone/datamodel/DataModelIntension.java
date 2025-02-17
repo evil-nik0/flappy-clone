@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.awt.Color;
 
+//pensándolo mejor, ésto debería llamarse ModelExtension, y la clase de la respuesta ModelExtAnswer, para que tanto
 public class DataModelIntension {
 	public GameState gs;
 	public boolean seBorroUnPipe;
@@ -12,6 +13,10 @@ public class DataModelIntension {
 	public List<KBackground> bgs;
 	public List<KPipe> pipes;
 	public List<KTree> trees;
+	public int score;
+	public long lastTimeScore;
+	
+	public static long DELTA_BETWEEN_SCORES_MS = 500;
 	
 	public DataModelIntension() {
 		ctrles = new Controles();
@@ -36,6 +41,8 @@ public class DataModelIntension {
 		trees.add( new KTree().setX(2 * World.worldW / 6) );
 		trees.add( new KTree().setX(4 * World.worldW / 6) );
 		trees.sort( (t1, t2) -> KTree.compare(t1, t2) );
+		score = 0;
+		lastTimeScore = System.currentTimeMillis();
 		
 		return this;
 	}
@@ -103,5 +110,10 @@ public class DataModelIntension {
 		if(pajarito.posicion.y <= 0 || pajarito.posicion.y >= World.worldH)
 			answer.wasACollision = true;
 		
+		//se comprueba si debe aumentarse el score
+		if(answer.currentTime - lastTimeScore > DELTA_BETWEEN_SCORES_MS) {
+			score++;
+			lastTimeScore = answer.currentTime;
+		}
     	}
 }

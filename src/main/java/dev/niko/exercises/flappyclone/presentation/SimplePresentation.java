@@ -23,7 +23,7 @@ public class SimplePresentation extends Frame {
 	public void init() {
 		setSize(SCREEN_W, SCREEN_H);
 		setSize(getWidth() + getInsets().left + getInsets().right, getHeight() + getInsets().top + getInsets().bottom);
-		setTitle("Presentación simple para Flappy");
+		setTitle("Flappy Clone");
 		setVisible(true);
 		
 		doubleBuffer = createImage(SCREEN_W, SCREEN_H);
@@ -68,6 +68,9 @@ public class SimplePresentation extends Frame {
 		for(KPipe pipe : e.pipes)
 			paintKPipe(pipe, g);
 		paintKRectangle(e.pajarito, g);
+		g.setColor(Color.BLACK);
+		g.drawString(Integer.toString(e.score), convertToPresentation(e.pajarito.posicion.x, e.pajarito.posicion.y, 0, 0)[0],
+							convertToPresentation(e.pajarito.posicion.x, e.pajarito.posicion.y, 0, 0)[1] - 10);
 	}
 	private void paintKRectangle(KRectangle r, Graphics g) {
 		int[] rectInfo = convertToPresentation(r.posicion.x, r.posicion.y, r.width, r.height);
